@@ -13,12 +13,12 @@ function App() {
   return (
     <>
     <Switch>
-      <Route exact path="/index" component={AdminNavbar} />
+      <Route exact path="/" component={AdminNavbar} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/signin" component={Signin} />
-      <Route exact path="/uhome/:id" component={Uhome} />
-      <Route exact path="/profile/:id" component={Profile} />
-      <Route exact path="/enterudata/:id" component={Enterudata} />
+      <Route exact path="/uhome/:token" component={Uhome} />
+      <Route exact path="/profile/:token" component={Profile} />
+      <Route exact path="/enterudata/:token" component={Enterudata} />
     </Switch>
     
     

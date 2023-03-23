@@ -2,6 +2,7 @@ const mongoose=require("mongoose")
 const BigPromise=require('../middleware/bigpromise')
 const User=require('../models/user')
 const bcrypt=require('bcryptjs')
+const jwt=require('jsonwebtoken')
 
 exports.signup=BigPromise(async (req,res)=>{
     
@@ -64,3 +65,17 @@ exports.signIn=BigPromise(async (req,res)=>{
     })
     
 })
+
+exports.profile=BigPromise(async(req,res)=>{
+    
+    const token=req.params.token;
+    const decode=jwt.verify(token,process.env.JWT_SECRET)
+    // console.log(decode) 
+    
+    const user=await User.findById(decode.id);
+
+    res.status(200).json({
+        user
+    })
+})
+

@@ -4,14 +4,14 @@ const AdminNavbar = () => {
   const [getuserdata, setDiseasedata] = useState([]);
   console.log(getuserdata);
 
-  const { id } = useParams("");
-  console.log(id);
+  const { token } = useParams("token");
+  console.log(token);
   
   const history = useHistory("");
 
   const getdata = async () => {
 
-      const res = await fetch(`/getuserdata/${id}`, {
+      const res = await fetch(`/api/user/profile/${token}`, {
           method: "GET",
           headers: {
               "Content-Type": "application/json"
@@ -69,23 +69,23 @@ const AdminNavbar = () => {
         
         <li class="nav-item">
 
-        <a class="nav-link" href={`/uhome/${id}`}>home</a>
+        <a class="nav-link" href={`/uhome/${token}`}>home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={`http://localhost:3000/profile/${id}`}> profile view</a>
+          <a class="nav-link" href={`http://localhost:3000/profile/${token}`}> profile view</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href={`http://localhost:3000/uhome/${id}`}>records</a>
+          <a class="nav-link" href={`http://localhost:3000/uhome/${token}`}>records</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={`http://localhost:3000/uhome/${id}`}>skin</a>
+          <a class="nav-link" href={`http://localhost:3000/uhome/${token}`}>skin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={`http://localhost:3000/uhome/${id}`}>heart</a>
+          <a class="nav-link" href={`http://localhost:3000/uhome/${token}`}>heart</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={`http://localhost:3000/uhome/${id}`}>diabetes</a>
+          <a class="nav-link" href={`http://localhost:3000/uhome/${token}`}>diabetes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="http://localhost:3000/index">logout</a>
