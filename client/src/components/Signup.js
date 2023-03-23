@@ -7,13 +7,6 @@ const RegisterUser = () => {
         name: "",
         email: "",
         password:"",
-        phoneno: "",
-        height: "",
-        age: "",
-        weight:"",
-        address: "",
-        city: ""
-        
     })
 
     const setdata = (e) => {
@@ -29,15 +22,15 @@ const RegisterUser = () => {
     const addinpdata = async (e) => {
         e.preventDefault();
 
-        const { name,email,password,phoneno,height,age,weight,address,city} = inpval;
+        const { name,email,password} = inpval;
 
-        const res = await fetch("/signup", {
+        const res = await fetch("/api/user/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name,email,password,phoneno,height,age,weight,address,city
+                name,email,password
             })
         });
 
@@ -50,7 +43,7 @@ const RegisterUser = () => {
         } else {
             alert("added");
             console.log("data added");
-            history.push("/index");
+            history.push("/");
         }
     
     

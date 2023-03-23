@@ -24,7 +24,7 @@ const Signinuser = () => {
 
         const { email, password } = inpval;
 
-        const res = await fetch("/signin", {
+        const res = await fetch("/api/user/signin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -35,15 +35,14 @@ const Signinuser = () => {
         });
 
         const data = await res.json();
-        alert(data._id);
-        if (res.status === 201 || !data) {
+        if (res.status === 401 || !data) {
             console.log("error ");
             alert("error user not found");
 
         } else {
             alert("Signin");
             console.log("data added");
-            history.push(`/uhome/${data._id}`);
+            history.push(`/uhome/${data.token}`);
         }
     }
   return (
