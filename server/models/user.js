@@ -15,22 +15,7 @@ const userSchema=mongoose.Schema({
         required:true,
         select:false
     },
-    phoneno:{
-        type:Number
-    },
-    age:{
-        type:Number
-    },
-    weight:{
-        type:Number
-    },
-    height:{
-        type:Number
-    },
-    address:{
-        type:String
-    },
-    city:{
+    url:{
         type:String
     },
     createdAt:{

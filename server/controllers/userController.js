@@ -3,10 +3,14 @@ const BigPromise=require('../middleware/bigpromise')
 const User=require('../models/user')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+const fileupload=require('express-fileupload')
+
 
 exports.signup=BigPromise(async (req,res)=>{
     
-    const {name,email,password}=req.body
+    console.log("req.files!!!!!!!!!!!!!!!!!!!!!!!!  ",req.body)
+    console.log("req.files!!!!!!!!!!!!!!!!!!!!!!!!  ",req.file)
+    const {name,email,password,url}=req.body
 
     const user1=await User.findOne({email:email})
     
@@ -25,7 +29,8 @@ exports.signup=BigPromise(async (req,res)=>{
    const user= await  User.create({
         name,
         email,
-        password
+        password,
+        url
     })
 
     const token=user.getJwtToken()

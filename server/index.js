@@ -1,7 +1,13 @@
 const express=require('express')
 const app=express();
+const fileupload=require('express-fileupload')
 require('dotenv').config()
 const connectWithDb=require('./config/db')
+
+app.use(fileupload({
+    useTempFiles:true,
+    tempFileDir:"/tmp/"                         // thes files are important to upload the image on the net and get the url
+}))
 
 app.use(express.json())
 

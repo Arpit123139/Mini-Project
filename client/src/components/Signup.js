@@ -9,10 +9,14 @@ const RegisterUser = () => {
         name: "",
         email: "",
         password:"",
+        url:""
     })
 
+    const[image,setImage]=useState('')
+    const[url,setUrl]=useState('')
+
     const setdata = (e) => {
-        console.log(e.target.value);
+        
         const { name, value } = e.target;
         setINP((preval) => {
             return {
@@ -25,14 +29,29 @@ const RegisterUser = () => {
         e.preventDefault();
 
         const { name,email,password} = inpval;
+        const imageUrl="";
+        const formdata=new FormData();
+        formdata.append('file',image)
+        formdata.append("upload_preset","j7hjcv76")
+        formdata.append("cloud_name","dsojdaybz")
 
+        const res1=await fetch('https://api.cloudinary.com/v1_1/dsojdaybz/image/upload',{
+          method:"post",
+          body:formdata
+        })
+        
+        const ImgData=await res1.json()
+        const url=ImgData.url
+        setUrl(url)
+        console.log("Image url !!!!!!!!!!!!!!!!!!!!!!!!!"+ImgData.url)
+        
         const res = await fetch("/api/user/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name,email,password
+                name,email,password,url
             })
         });
 
@@ -51,36 +70,23 @@ const RegisterUser = () => {
         
     }
 
-
+      const handleImageInput=(e)=>{
+        console.log(e.target.files)
+        setImage(e.target.files[0]);
+      }
   return (
-    // <div className="container-main">
-    //     <div className="form-box">
-    //         <h1>Sign Up</h1>
-    //             <form>
-    //                 <div className="input-group">
-    //                     <div className="input-field">
-    //                         <input type="text" value={inpval.name} onChange={setdata} name="name" placeholder="Name"></input>
-    //                     </div>
-    //                     <div className="input-field">
-    //                         <input type="email" value={inpval.email} onChange={setdata} name="email" placeholder="Email"></input>
-    //                     </div>
-    //                     <div className="input-field">
-    //                         <input type="password" value={inpval.password} onChange={setdata} name="password" placeholder="Password"></input>
-    //                     </div>
-    //                 </div>
-    //                 <div className="btn-field">
-    //                     <button type="submit" onClick={addinpdata}>Sign Up</button>
-    //                     <button type="button">Sign In</button>
-    //                 </div>
-    //             </form>
-    //     </div>
-    // </div>
     <div class="login-box">
       <Helmet>
                 <style>{'body { background: linear-gradient(#141e30, #243b55); }'}</style>
             </Helmet>
   <h2>Signup</h2>
-  <form>
+  <form  >
+  <div class="user-box">
+      <input type="file" onChange={handleImageInput} name="image1"  />
+      <label>ProfileImage</label><br></br>
+
+      <image src={url}></image>
+    </div>
     <div class="user-box">
       <input type="text" value={inpval.name} onChange={setdata} name="name" required="" />
       <label>Name</label>
